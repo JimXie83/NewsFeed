@@ -1,0 +1,97 @@
+﻿@model IEnumerable<nf.Models.NewsFeed>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<html ng-app="myApp">
+<head>
+
+    <script src="~/Content/angular.js"></script>
+    <script src="~/Content/angular-animate.js"></script>
+
+    <script src="~/Content/ui-bootstrap-tpls.js"></script>
+    <script src="~/Content/smart-table.js"></script>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/angular-toastr.css" rel="stylesheet" />
+    <link href="~/Content/app.css" rel="stylesheet" />
+    <script src="~/Content/angular-toastr.tpls.js"></script>
+    <script src="~/Content/SearchEditForAll.js"></script>
+
+</head>
+<body ng-controller="SearchEntityController as ctrl">
+    <form name="editForm" role="form" class="form-horizontal">
+        <div class="formcontainer text-center" style="white-space: nowrap;">
+
+            <div class="panel-heading"><span class="lead">News Content Management</span></div>
+
+            <table border="0" width="100%">
+                <tr>
+                    <td>
+                        <div class="col-md-12 form-group top10">
+                            <table st-table="ctrl.displayEntities" st-safe-src="ctrl.entities"
+                                   class="myTable table-striped col-xs-9" ng-show="ctrl.entities.length>0">
+
+                                <thead>
+                                    <tr>
+                                        <th width="60%" st-sort="content">News Content</th>
+                                        <th width="30%" st-sort="date_published">Pubished Date</th>
+                                        <th width="3%"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="u in ctrl.displayEntities">
+                                        <td><span ng-bind="u.content"></span></td>
+                                        <td><span ng-bind="u.date_published | {{ctrl.DateFormat}}"></span></td>
+                                        <td>
+                                            <button type="button" ng-click="ctrl.deleteById(u.id)" class="btn btn-danger custom-width"> Remove</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="3" class="text-center">
+                                            <div st-pagination="" st-items-by-page="ctrl.pageSize"></div>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="text-center">
+                    <td>
+                        <div class="row form-inline top10">
+                            <div class="form-group col-md-5">
+                                <label class="control-label">News:</label>
+                                <input type="text" ng-model="ctrl.editEntity.content" name="content"
+                                       class="form-control" placeholder="Enter news content" />
+                            </div>
+                            <div class="form-group col-md-5">
+                                <label class="control-label col-md-2"> Date:</label>
+                                <div class="col-md-3">
+                                    <div class="input-group" ng-controller="myDatePickerCtrl" style="min-width: 166px;">
+                                        <input type="text" ng-model="ctrl.editEntity.date_published" class="form-control input-sm" uib-datepicker-popup="{{format}}" placeholder="{{format}}" is-open="opened" close-text="Close" />
+                                        <span class="input-group-btn"> <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button> </span>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <button ng-click="ctrl.save()" class="btn btn-success custom-width" title="Add"><span class="glyphicon glyphicon-floppy-disk"></span> Add </button>
+
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+          
+
+            
+        </div>
+       
+        <br />
+    </form>
+</body>
+</html>

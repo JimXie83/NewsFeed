@@ -1,0 +1,67 @@
+﻿
+
+<html ng-app="myApp">
+<head>
+    <title>contacts Info Management</title>
+    <script src="../Content/angular.js"></script>
+    <script src="../Content/smart-table.js"></script>
+    <script src="../Content/SearchEditForAll.js"></script>
+
+    <!--<script src="/content/js/angular/1.5.3/angular.js"></script>
+    <script src="/content/js/angular/1.5.3/angular-animate.js"></script>
+    <script src="/content/js/angular-ui/ui-bootstrap-tpls.js"></script>
+    <script src="/content/js/angular-smart-table/smart-table.js"></script>
+    <script src="/content/js/angular-toastr/angular-toastr.tpls.js"></script>
+
+    <link href="/content/css/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="/content/js/angular-toastr/angular-toastr.css" rel="stylesheet" />
+    <link href="/content/css/app.css" rel="stylesheet" />
+
+    <script> var MODEL_CLASS_NAME = "com.jamesx.domain.Contacts"; </script>
+    <script src="/content/js/SearchEditForAll.js"></script>-->
+
+
+</head>
+<body ng-controller="SearchEntityController as ctrl">
+    <div ng-class="{'tab-pane active': ctrl.activeTab === 1, 'tab-pane' : ctrl.activeTab !== 1}">
+        <form name="editForm" role="form">
+            <div class="panel panel-default">
+                <div class="formcontainer">
+                    <div class="row form-inline top10">
+                        <div class="form-group col-md-4">
+                            <div class="col-md-3 control-lable input-sm">Text</div>
+                            <div class="col-md-1">
+                               
+                                <input type="text" ng-model="ctrl.editEntity.text" name="empNo"
+                                       class="form-control input-sm" placeholder="Enter Employee No." />
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <div class="col-md-3 control-lable input-sm">Date Published</div>
+                            <div class="col-md-1">
+                                <select class="search_op pull-left form-control input-sm" search_col="birthDate"></select>
+                                <div my-date-picker ng-model="ctrl.editEntity.datepublished"></div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="row top30">
+                        <div class="form-group row text-center">
+                            <button ng-click="ctrl.search()" class="btn btn-success custom-width" title="Search records with specified criteria"><span class="glyphicon glyphicon-search"></span> Search </button>
+                            <button ng-click="ctrl.clearSearch()" class="btn btn-success custom-width" title="Clear all search criteria"><span class="glyphicon glyphicon-scissors"></span> Clear </button>
+                            <button ng-click="ctrl.showSearchFilters()" class="btn btn-success custom-width" title="Dispaly specified search criteria"><span class="glyphicon glyphicon-eye-open"></span> Criteria </button>
+                            <button ng-click="ctrl.reDoSearch()" class="btn btn-success custom-width" title="Recover previou inputs"><span class="glyphicon glyphicon-repeat"></span> Re-Do </button>
+                            <button ng-click="ctrl.newEdit()" class="btn btn-success custom-width" title="Create a new record"><span class="glyphicon glyphicon-plus-sign"></span> New </button>
+                            <%--<button ng-click="ctrl.debug()" class="btn btn-success custom-width" title="Debug"> Debug</button>--%>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+
+    </div>
+</body>
+</html>

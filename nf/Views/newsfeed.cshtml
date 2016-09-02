@@ -1,0 +1,78 @@
+@model Solution.ViewModels.newsfeed_VM
+@section scripts
+{
+    <script type="text/javascript">
+        var search_data = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+        var module_name = "@Html.Raw(Model.GetType().FullName)";
+    </script>
+}
+<div id="tabs" class="container center">
+    <ul class="ui-tabs-nav" role="tablist">
+        <li> <a href="#tab_search" id="ui-id-1">Search</a></li>
+        <li><a href="#tab_edit" id="ui-id-2">Edit</a></li>
+    </ul>
+    <div id="tab_search">
+        
+            <div class="row">
+			
+
+                <div class="col-xs-4 form-group">
+				    <label class="control-label pull-left">date_published:</label>
+                    <select class="pull-right search_op" data-bind="value: search_vm.Ops.date_published"></select>
+                    <input class="form-control input-sm datepicker" data-bind="date_picker: search_vm.date_published" />
+                </div>
+			
+
+                <div class="col-xs-4 form-group">
+				    <label class="control-label pull-left">Text:</label>
+                    <select class="pull-right search_op" data-bind="value: search_vm.Ops.content"></select>
+                    <input class="form-control input-sm" data-bind="value: search_vm.content" />
+                </div>
+			
+
+            </div>
+        
+
+        <div class="form-group row text-center">
+            <button class="btn btn-primary" data-bind="click: search_vm.search">Search</button>
+            <button class="btn btn-primary" data-bind="click: search_vm.clear">Clear</button>
+            <button class="btn btn-primary" data-bind="click: edit_vm.add_new_viewmodel">New</button>
+            <button class="btn btn-primary" data-bind="click: search_vm.show_criteria">Show Criteria</button>
+            <button class="btn btn-primary" data-bind="click: search_vm.debug">Debug</button>
+        </div>
+
+        <div class="row">
+            <div id="result_div" style="display:none;width:100%;" class="center" title="Double click the row to edit/add/delete/view...">
+                <table id="result_grid" class="scroll"></table>
+                <div id="result_pager" class="scroll" style="text-align:center;"></div>
+            </div>
+        </div>
+    </div>
+    <div id="tab_edit" style="display: none;">
+        
+            <div class="row">
+
+                <div class="col-xs-4">
+                    <label class="control-label">date_published:</label>
+                    <input class="form-control input-sm datepicker" data-bind="date_picker: edit_vm.date_published" />
+                </div>
+
+                <div class="col-xs-4">
+                    <label class="control-label">培训内容:</label>
+                    <input class="form-control input-sm" data-bind="value: edit_vm.content" />
+                </div>
+
+			</div>
+		
+
+        <div class="form-group row text-center">
+            <hr />
+            <button class="btn btn-primary" data-bind="click: edit_vm.save">Save</button>
+            <button class="btn btn-primary" data-bind="click: edit_vm.add_new_viewmodel">New</button>
+            <button class="btn btn-primary" data-bind="click: edit_vm.cancel_change">Cancel</button>
+            <button class="btn btn-primary" data-bind="click: edit_vm.redo_change">Re-Do</button>
+            <button class="btn btn-primary" data-bind="click: edit_vm.delete_viewmodel">Delete</button>
+            <button class="btn btn-primary" data-bind="click: edit_vm.debug">Debug</button>
+        </div>
+    </div>
+</div>

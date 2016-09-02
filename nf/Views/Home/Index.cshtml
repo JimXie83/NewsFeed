@@ -1,0 +1,88 @@
+﻿@model IEnumerable<nf.Models.NewsFeed>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<html ng-app="myApp">
+<head>
+
+    <script src="~/Content/angular.js"></script>
+    <script src="~/Content/angular-animate.js"></script>
+
+    <script src="~/Content/ui-bootstrap-tpls.js"></script>
+    <script src="~/Content/smart-table.js"></script>
+    <script src="~/Content/angular-toastr.js"></script>
+
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/angular-toastr.css" rel="stylesheet" />
+    <script src="~/Content/SearchEditForAll.js"></script>
+</head>
+<body ng-controller="SearchEntityController as ctrl">
+    <div>
+
+
+        <h2>Index</h2>
+
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+
+
+        <div class="row">
+
+
+            <div class="col-xs-4 form-group">
+                <label class="control-label pull-left">date_published:</label>
+                <div class="input-group" ng-controller="myDatePickerCtrl" style="min-width: 166px;">
+                    <input type="text" ng-model="ctrl.editEntity.datepublished" ng-change="ctrl.onChange()" class="form-control input-sm" uib-datepicker-popup="{{format}}" placeholder="{{format}}" is-open="opened" close-text="Close" />
+                    <span class="input-group-btn"> <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button> </span>
+                </div>
+ 
+            </div>
+
+            <div class="col-xs-4 form-group">
+                <label class="control-label pull-left">Text:</label>
+                <input type="text" ng-model="ctrl.editEntity.text" name="empNo"
+                       class="form-control input-sm" placeholder="Enter Employee No." />  
+            </div>
+
+            <button ng-click="ctrl.save()" class="btn btn-success custom-width" title="Add"><span class="glyphicon glyphicon-floppy-disk"></span> Add </button>
+
+
+        </div>
+
+        <table class="table">
+
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.content)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.date_published)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.content)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.date_published)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+    </div>
+</body>
+</html>
